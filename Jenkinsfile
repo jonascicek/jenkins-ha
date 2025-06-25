@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18'
+        }
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -9,8 +13,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-                    apt-get install -y nodejs
                     node -v
                     npm -v
                     npm ci
