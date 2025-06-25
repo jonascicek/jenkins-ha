@@ -8,8 +8,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm ci'
-                sh 'npm run build'
+                sh '''
+                    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+                    apt-get install -y nodejs
+                    node -v
+                    npm -v
+                    npm ci
+                    npm run build
+                '''
             }
         }
     }
